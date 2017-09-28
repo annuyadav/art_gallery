@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+require_relative './file_parser'
+require_relative 'lib/foot_traffic_report'
+
+file_parser = ArtGallery::FileParser.new(ARGV[0] || 'input_data.txt')
+input_data = file_parser.inputs
+
+if input_data.empty?
+  puts 'data not available'
+else
+  input_entries = input_data.shift.first
+
+  _foot_traffic_report = ArtGallery::FootTrafficReport.new(inputs: input_data, number_of_input: input_entries)
+  _foot_traffic_report.analyze_foot_traffic
+  _foot_traffic_report.put_results
+end
